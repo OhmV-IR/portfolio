@@ -1,3 +1,5 @@
+import SocialCard from "@/components/SocialCard";
+import { IconBrandGithub } from "@tabler/icons-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -58,6 +60,10 @@ export default function Home() {
           >
             Documentation
           </a>
+        </div>
+        <div>
+          <h1>Social card example:</h1>
+          <SocialCard title="test" backgroundColorName="gray-900" username="test" accentColorName="blue" iconComponent={<IconBrandGithub></IconBrandGithub>} url="https://example.com"/>
         </div>
       </main>
     </div>
