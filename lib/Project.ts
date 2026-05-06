@@ -5,7 +5,7 @@ export interface Project {
   description: string;
   tags: string[];
   skillTags: string[];
-  status: "Active" | "Prototype" | "Maintained" | "Archived";
+  status: "Active Contributor" | "Prototype" | "Past Contributor" | "Archived" | "Active" | "Maintained";
   featured: boolean;
   repoUrl?: string;
   liveUrl?: string;

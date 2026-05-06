@@ -15,7 +15,58 @@ body {
 }
 
 .portfolio-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   padding: 4.5rem 0 2rem;
+}
+
+.portfolio-hero .container-xl {
+  position: relative;
+  z-index: 1;
+}
+
+.portfolio-avatar-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.portfolio-avatar-image {
+  position: absolute;
+  top: 1.5rem;
+  right: max(1.5rem, calc((100vw - 1320px) / 2));
+  width: clamp(14rem, 24vw, 24rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(32, 107, 196, 0.14);
+  border-radius: 50%;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)),
+    var(--portfolio-avatar-image),
+    #e9f0f8;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 2rem 5rem rgba(15, 23, 42, 0.1);
+  color: rgba(32, 107, 196, 0.18);
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.portfolio-avatar-image span {
+  opacity: var(--portfolio-avatar-initials-opacity);
+}
+
+@media (max-width: 991.98px) {
+  .portfolio-avatar-image {
+    top: 0.75rem;
+    right: 1rem;
+    width: clamp(9rem, 38vw, 15rem);
+    opacity: 0.55;
+  }
 }
 
 .portfolio-card {

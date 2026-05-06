@@ -4,12 +4,11 @@ import LanguagePanel from "@/components/LanguagePanel";
 import ProjectCard from "@/components/ProjectCard";
 import SkillBadge from "@/components/SkillBadge";
 import { getGitHubLanguageStats } from "@/lib/github-languages";
-import { getFeaturedProjects } from "@/lib/data/projects";
-import { skills } from "@/lib/data/skills";
+import { getFeaturedProjects, getTopProjectSkills } from "@/lib/data/projects";
 
 export default async function Home() {
   const featuredProjects = getFeaturedProjects();
-  const competitiveSkills = skills.slice(0, 5);
+  const competitiveSkills = getTopProjectSkills(5);
   const languages = await getGitHubLanguageStats();
 
   return (
@@ -18,21 +17,21 @@ export default async function Home() {
         <div className="container-xl">
           <div className="row align-items-center g-4">
             <div className="col-lg-8">
-              <div className="page-pretitle">Portfolio</div>
-              <h1 className="display-5 fw-bold mb-3">Adrien Bourdeaux builds across game mods, systems tooling, web interfaces, and automation.</h1>
+              <div className="page-pretitle">Ohm&apos;s Portfolio</div>
+              <h1 className="display-5 fw-bold mb-3">Building systems from the microscopic details to the high-level patterns.</h1>
               <p className="lead text-secondary mb-4">
-                Avid coder and open-source contributor working on large-scale projects that span web design, backend tooling, game modding, and build infrastructure.
+                A passionate software developer working on large-scale projects spanning across embedded systems, web development and high-level systems design and infrastructure work with a strong belief in community impact and contributing to the open-source community wherever possible.
               </p>
               <div className="d-flex flex-wrap gap-2">
-                <Link href="/projects" className="btn btn-primary">
+                <Link href="/projects" className="btn btn-primary btn-lg">
                   View Projects
                   <IconArrowRight size={18} stroke={1.75} />
                 </Link>
-                <Link href="/socials" className="btn btn-outline-primary">
+                <Link href="/socials" className="btn btn-outline-primary btn-lg">
                   <IconShare2 size={18} stroke={1.75} />
                   Socials
                 </Link>
-                <Link href="/resume" className="btn btn-outline-secondary">
+                <Link href="/resume" className="btn btn-outline-secondary btn-lg">
                   <IconFileCv size={18} stroke={1.75} />
                   Resume
                 </Link>
@@ -66,7 +65,7 @@ export default async function Home() {
           <div className="d-flex align-items-center justify-content-between mb-3">
             <div>
               <h2 className="mb-1">Featured Projects</h2>
-              <div className="text-secondary">The top workstreams currently worth a closer look.</div>
+              <div className="text-secondary">The projects I'm currently working on or the projects I liked the most.</div>
             </div>
             <Link href="/projects" className="btn btn-outline-primary">
               All Projects

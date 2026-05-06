@@ -11,6 +11,7 @@ export default function LanguagePanel({ languages }: LanguagePanelProps) {
         <div className="d-flex align-items-start justify-content-between gap-3 mb-3">
           <div>
             <h2 className="card-title mb-1">Top Languages</h2>
+            <div className="text-secondary">Measured via public GitHub repository data</div>
           </div>
           <span className="badge bg-blue-lt text-blue">Live</span>
         </div>

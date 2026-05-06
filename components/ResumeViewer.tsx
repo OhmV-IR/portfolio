@@ -29,7 +29,7 @@ export default function ResumeViewer({ filePath, downloadName }: ResumeViewerPro
           <div className="empty">
             <p className="empty-title">Resume preview is not available.</p>
             <p className="empty-subtitle text-secondary">
-              Add a PDF at <code>public/resume.pdf</code>, or use the buttons above to open or download it.
+              Check back later for this to be uploaded.
             </p>
           </div>
         </object>

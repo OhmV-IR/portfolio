@@ -21,7 +21,7 @@ export default function SiteNavbar() {
     <header className="navbar navbar-expand-md navbar-light bg-white border-bottom">
       <div className="container-xl">
         <Link href="/" className="navbar-brand fw-bold">
-          Adrien Bourdeaux
+          Ohm's Portfolio
         </Link>
         <button
           className="navbar-toggler"
