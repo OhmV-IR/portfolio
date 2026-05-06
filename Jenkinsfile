@@ -4,7 +4,9 @@ pipeline {
         nodejs 'node24'
     }
     stages{
+        stage("Build tasks"){
         parallel {
+            stages {
             stage("Build"){
                 agent { label "windows || linux"}
                 steps {
@@ -35,6 +37,8 @@ pipeline {
                     }
                 }
             }
+            }
+        }
         }
     }
 }
