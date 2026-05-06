@@ -26,8 +26,8 @@ export const impossibleList: ImpossibleGoalSection[] = [
     goals: [
       {
         title: "Make a meaningful contribution to a major open-source project",
+        note: "The idea is to learn how to work with a team and the general architecture of open-source software development",
         completed: true,
-        note: "Contribution context through projects such as vcpkg, Nitrox, and PylonMC.",
         subtasks: [
           { title: "Find an issue or contribution area", completed: true },
           { title: "Build the project locally", completed: true },
@@ -44,15 +44,15 @@ export const impossibleList: ImpossibleGoalSection[] = [
         ],
       },
       {
-        title: "Contribute to a game or modding framework",
-        completed: true,
-        note: "Public work around SubnauticaNitrox and PylonMC projects.",
+        title: "Contribute to a major project, eg linux kernel",
+        completed: false,
         subtasks: [
-          { title: "Join or follow an active modding project", completed: true },
-          { title: "Understand the project architecture", completed: true },
-          { title: "Contribute code, tooling, or integration work", completed: true },
-        ],
-      },
+          {title: "Decide which project to contribute to", completed: false},
+          {title: "Find an issue I can help with", completed: false},
+          {title: "Create a pull request to fix it", completed: false},
+          {title: "Have the pull request merged", completed: false}
+        ]
+      }
     ],
   },
   {
@@ -61,20 +61,25 @@ export const impossibleList: ImpossibleGoalSection[] = [
       {
         title: "Build a CI/CD infrastructure project",
         completed: true,
-        note: "Jenkins agent infrastructure and build tooling work.",
+        note: "Creating a Jenkins controller/agent CI/CD infrastructure and using it for my projects.",
         subtasks: [
           { title: "Containerize the build environment", completed: true },
-          { title: "Document required tools and images", completed: false },
-          { title: "Run it from a real pipeline", completed: true },
+          { title: "Document required tools and images", completed: true },
+          { title: "Host it and run it locally", completed: true },
+          { title: "Migrate all my github actions to the Jenkins system", completed: true }
         ],
       },
       {
-        title: "Write a C/C++ project with a clean build system",
+        title: "Write an actual CI/CD pipeline",
         completed: true,
+        note: "These pipelines are often used in industry to automate testing and deployment at scale, so learning them is important to me",
         subtasks: [
-          { title: "Use CMake or a comparable build system", completed: true },
-          { title: "Separate source and build artifacts", completed: true },
-          { title: "Add repeatable build instructions", completed: false },
+          { title: "Get a project that is in need of CI", completed: true},
+          { title: "Create an action to build on PR receive or push", completed: true },
+          { title: "Create an action to run unit tests automatically", completed: true },
+          { title: "Create an action to check code quality on every PR", completed: true},
+          { title: "Release action", completed: true},
+          { title: "Caching and dependency management", completed: true}
         ],
       },
     ],
@@ -83,56 +88,70 @@ export const impossibleList: ImpossibleGoalSection[] = [
     title: "Learning",
     goals: [
       {
-        title: "Build a raytracer",
-        completed: true,
-        evidenceUrl: "https://github.com/OhmV-IR/python-raytracer",
-        subtasks: [
-          { title: "Render basic primitives", completed: true },
-          { title: "Add lighting and shadows", completed: true },
-          { title: "Write up the implementation", completed: false },
-        ],
-      },
-      {
-        title: "Ship a Kotlin/JVM project",
+        title: "Ship a public API",
         completed: false,
+        evidenceUrl: "https://pylonmc.github.io/",
+        note: "Ship something that is nice to work with and used by others to make software.",
         subtasks: [
-          { title: "Build a working local prototype", completed: true },
-          { title: "Integrate with a real plugin/framework ecosystem", completed: true },
+          { title: "Build/Contribute to the interface", completed: true },
+          { title: "Work with / test the interface", completed: true },
           { title: "Publish a stable release", completed: false },
         ],
       },
       {
-        title: "Make a constrained-device game",
+        title: "Make a somewhat playable video game",
         completed: true,
-        evidenceUrl: "https://github.com/OhmV-IR/ti84-tictactoe",
+        note: "Make a game to learn Unreal engine, a new technology for me. Ideally people will find the experience of playing it somewhat pleasing.",
         subtasks: [
           { title: "Design the game loop", completed: true },
-          { title: "Implement win/draw detection", completed: true },
-          { title: "Package it for easy installation", completed: false },
+          { title: "Create the gameplay mechanics", completed: false },
+          { title: "Create the maps / art", completed: false },
+          { title: "Ship it publicly on steam or otherwise", completed: false },
+          { title: "Get actual players and feedback", completed: false }
         ],
       },
+      {
+        title: "Complete a reverse engineering project",
+        evidenceUrl: "https://github.com/SpectreRevival",
+        note: "Could be a decompile (even partial), or a revival project. Just something to teach me the inner workings of the machines I spend so much of my time working with.",
+        completed: false,
+        subtasks: [
+          { title: "Decide on a project", completed: true},
+          { title: "Research the scope and time investment of the project", completed: true},
+          { title: "Decide on an approach", completed: true},
+          { title: "Complete the frontend server", completed: false },
+          { title: "Complete the gameserver", completed: false},
+          { title: "Publish it and evaluate community impact", completed: false}
+        ]
+      }
     ],
   },
   {
     title: "Community & Events",
     goals: [
       {
-        title: "Build a website for a game jam or community event",
+        title: "Work to make a community event possible",
         completed: true,
         evidenceUrl: "https://gamejamsite.vercel.app",
+        note: "The idea of this goal is to translate making software into real-world community impact.",
         subtasks: [
-          { title: "Publish the site publicly", completed: true },
-          { title: "Make the layout readable on mobile", completed: true },
-          { title: "Archive event materials after the event", completed: false },
+          { title: "Contact an organization in need of my skills", completed: true },
+          { title: "Make something that fulfills their needs", completed: true },
+          { title: "Volunteer and see the impact in-person", completed: true },
         ],
       },
       {
         title: "Give a technical workshop or demo",
         completed: false,
+        evidenceUrl: "https://www.youtube.com/@OhmVIR",
+        note: "Likely in the form of reviving my programming tutorials / system design dictation videos on my youtube channel.",
         subtasks: [
           { title: "Pick a topic", completed: true },
-          { title: "Prepare a small demo project", completed: true },
-          { title: "Present it to an audience", completed: false },
+          { title: "Prepare the script", completed: false },
+          { title: "Record the raw footage", completed: false },
+          { title: "Edit the video", completed: false },
+          { title: "Post it", completed: false },
+          { title: "Have someone learn something from it", completed: false },
         ],
       },
     ],
