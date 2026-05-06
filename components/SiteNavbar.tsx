@@ -43,7 +43,7 @@ export default function SiteNavbar() {
                 <li className={`nav-item ${isActive ? "active" : ""}`} key={item.href}>
                   <Link href={item.href} className="nav-link" onClick={() => setIsOpen(false)}>
                     <span className="nav-link-icon d-md-none d-lg-inline-block">
-                      <Icon size={18} stroke={1.75} />
+                      <Icon size={24} stroke={1.75} />
                     </span>
                     <span className="nav-link-title">{item.label}</span>
                   </Link>
