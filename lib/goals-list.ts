@@ -77,16 +77,6 @@ export const impossibleList: ImpossibleGoalSection[] = [
           { title: "Add repeatable build instructions", completed: false },
         ],
       },
-      {
-        title: "Build a production-quality portfolio",
-        completed: false,
-        subtasks: [
-          { title: "Create reusable project and social cards", completed: true },
-          { title: "Pull GitHub language stats automatically", completed: true },
-          { title: "Add a real resume PDF", completed: false },
-          { title: "Polish mobile layout with screenshots", completed: false },
-        ],
-      },
     ],
   },
   {

@@ -1,9 +1,9 @@
 import ImpossibleList from "@/components/ImpossibleList";
 import PageHeader from "@/components/PageHeader";
-import { getImpossibleListProgress, impossibleList } from "@/lib/impossible-list";
+import { getImpossibleListProgress, impossibleList } from "@/lib/goals-list";
 
 export const metadata = {
-  title: "Impossible List | Adrien Bourdeaux",
+  title: "Coding Bucket List",
   description: "An evolving public list of goals, milestones, and progress.",
 };
 
@@ -14,8 +14,8 @@ export default function GoalsPage() {
     <>
       <PageHeader
         eyebrow="Progress"
-        title="Impossible List"
-        description="A public, always-evolving todo list for engineering, learning, community, and long-term goals. Completed goals and subtasks are checked off in code."
+        title="Coding Bucket List"
+        description="A public, always-evolving todo list for engineering, learning, community, and long-term goals."
       />
       <div className="page-body">
         <div className="container-xl">

@@ -1,5 +1,5 @@
 import { IconExternalLink } from "@tabler/icons-react";
-import type { ImpossibleGoal, ImpossibleGoalSection, ImpossibleSubtask } from "@/lib/impossible-list";
+import type { ImpossibleGoal, ImpossibleGoalSection, ImpossibleSubtask } from "@/lib/goals-list";
 
 interface ImpossibleListProps {
   sections: ImpossibleGoalSection[];
