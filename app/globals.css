@@ -37,3 +37,7 @@ body {
   min-height: 72vh;
   border: 0;
 }
+
+.impossible-subtasks .list-group-item:last-child {
+  padding-bottom: 0;
+}

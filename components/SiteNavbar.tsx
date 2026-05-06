@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconBriefcase, IconFileCv, IconHome, IconMenu2, IconShare2 } from "@tabler/icons-react";
+import { IconBriefcase, IconFileCv, IconHome, IconListCheck, IconMenu2, IconShare2 } from "@tabler/icons-react";
 
 const navItems = [
   { href: "/", label: "Home", icon: IconHome },
   { href: "/projects", label: "Projects", icon: IconBriefcase },
+  { href: "/goals", label: "Goals", icon: IconListCheck },
   { href: "/socials", label: "Socials", icon: IconShare2 },
   { href: "/resume", label: "Resume", icon: IconFileCv },
 ];
@@ -20,7 +21,7 @@ export default function SiteNavbar() {
     <header className="navbar navbar-expand-md navbar-light bg-white border-bottom">
       <div className="container-xl">
         <Link href="/" className="navbar-brand fw-bold">
-          Portfolio
+          Adrien Bourdeaux
         </Link>
         <button
           className="navbar-toggler"

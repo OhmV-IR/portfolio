@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
+
+A Next.js and Tabler CSS portfolio for Adrien Bourdeaux.
 
 ## Getting Started
 
@@ -16,9 +18,27 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## GitHub Language Stats
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The homepage languages card pulls from GitHub server-side and revalidates daily. By default it uses public repositories from `OhmV-IR`.
+
+To include private repositories, create `.env.local` and add a GitHub fine-grained token with repository metadata access:
+
+```bash
+GITHUB_TOKEN=github_pat_...
+```
+
+To exclude repositories from the language calculation, use comma-separated repo names or full names:
+
+```bash
+GITHUB_LANGUAGE_REPO_BLACKLIST=OhmV-IR/old-demo,scratch-repo
+```
+
+Forks are excluded by default so large upstream forks do not overwhelm the chart. To include forks:
+
+```bash
+GITHUB_LANGUAGE_INCLUDE_FORKS=true
+```
 
 ## Learn More
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IconBrandGithub, IconExternalLink } from "@tabler/icons-react";
 import PageHeader from "@/components/PageHeader";
-import { getProjectBySlug, projects } from "@/lib/portfolio-data";
+import { getProjectBySlug, getProjectDisplayTags, projects } from "@/lib/portfolio-data";
 
 interface ProjectDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -37,6 +37,8 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
     notFound();
   }
 
+  const displayTags = getProjectDisplayTags(project);
+
   return (
     <>
       <PageHeader eyebrow={project.status} title={project.title} description={project.summary} />
@@ -58,7 +60,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                   <div className="mb-3">
                     <div className="text-secondary small mb-2">Tags</div>
                     <div className="d-flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
+                      {displayTags.map((tag) => (
                         <span className="badge bg-blue-lt text-blue" key={tag}>
                           {tag}
                         </span>

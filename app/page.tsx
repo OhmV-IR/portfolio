@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { IconArrowRight, IconFileCv, IconShare2 } from "@tabler/icons-react";
+import LanguagePanel from "@/components/LanguagePanel";
 import ProjectCard from "@/components/ProjectCard";
 import SkillBadge from "@/components/SkillBadge";
+import { getGitHubLanguageStats } from "@/lib/github-languages";
 import { getFeaturedProjects, skills } from "@/lib/portfolio-data";
 
-export default function Home() {
+export default async function Home() {
   const featuredProjects = getFeaturedProjects();
   const competitiveSkills = skills.slice(0, 5);
+  const languages = await getGitHubLanguageStats();
 
   return (
     <>
@@ -15,9 +18,9 @@ export default function Home() {
           <div className="row align-items-center g-4">
             <div className="col-lg-8">
               <div className="page-pretitle">Portfolio</div>
-              <h1 className="display-5 fw-bold mb-3">Building thoughtful web products with React, Next.js, and polished interfaces.</h1>
+              <h1 className="display-5 fw-bold mb-3">Adrien Bourdeaux builds across game mods, systems tooling, web interfaces, and automation.</h1>
               <p className="lead text-secondary mb-4">
-                A focused collection of active projects, competitive skills, social links, and a resume preview in one clean Tabler-styled experience.
+                Avid coder and open-source contributor working on large-scale projects that span web design, backend tooling, game modding, and build infrastructure.
               </p>
               <div className="d-flex flex-wrap gap-2">
                 <Link href="/projects" className="btn btn-primary">
@@ -35,14 +38,21 @@ export default function Home() {
               </div>
             </div>
             <div className="col-lg-4">
+              <div className="row row-cards">
+                <div className="col-12">
               <div className="card">
                 <div className="card-body">
-                  <h2 className="card-title">Competitive Skills</h2>
+                  <h2 className="card-title">Skills</h2>
                   <div className="list-group list-group-flush">
                     {competitiveSkills.map((skill) => (
                       <SkillBadge skill={skill} key={skill.name} />
                     ))}
                   </div>
+                </div>
+              </div>
+                </div>
+                <div className="col-12">
+                  <LanguagePanel languages={languages} />
                 </div>
               </div>
             </div>

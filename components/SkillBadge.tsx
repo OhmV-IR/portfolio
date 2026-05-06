@@ -9,10 +9,7 @@ export default function SkillBadge({ skill }: SkillBadgeProps) {
     <div className="list-group-item">
       <div className="row align-items-center">
         <div className="col">
-          <div className="d-flex align-items-center gap-2">
-            <strong>{skill.name}</strong>
-            {skill.emphasis ? <span className="badge bg-green-lt text-green">Competitive</span> : null}
-          </div>
+          <strong>{skill.name}</strong>
           <div className="text-secondary small">{skill.category}</div>
         </div>
         {typeof skill.level === "number" ? (

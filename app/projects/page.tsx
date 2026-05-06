@@ -1,6 +1,6 @@
 import PageHeader from "@/components/PageHeader";
-import ProjectCard from "@/components/ProjectCard";
-import { projects } from "@/lib/portfolio-data";
+import ProjectsBrowser from "@/components/ProjectsBrowser";
+import { getProjectSkillTags, projects } from "@/lib/portfolio-data";
 
 export default function ProjectsPage() {
   return (
@@ -12,13 +12,7 @@ export default function ProjectsPage() {
       />
       <div className="page-body">
         <div className="container-xl">
-          <div className="row row-cards">
-            {projects.map((project) => (
-              <div className="col-md-6 col-xl-4" key={project.slug}>
-                <ProjectCard project={project} />
-              </div>
-            ))}
-          </div>
+          <ProjectsBrowser projects={projects} skillTags={getProjectSkillTags()} />
         </div>
       </div>
     </>

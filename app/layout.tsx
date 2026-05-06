@@ -4,8 +4,8 @@ import "./globals.css";
 import SiteNavbar from "@/components/SiteNavbar";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "A modern portfolio for projects, skills, socials, and resume.",
+  title: "Adrien Bourdeaux | Portfolio",
+  description: "Projects, open-source contributions, skills, socials, and resume for Adrien Bourdeaux.",
 };
 
 export default function RootLayout({
