@@ -1,6 +1,14 @@
 import {
+  IconBrandDiscord,
+  IconBrandDocker,
   IconBrandGithub,
+  IconBrandGmail,
+  IconBrandLinkedin,
+  IconBrandSteam,
+  IconBrandTwitch,
+  IconBrandXbox,
   IconBrandYoutube,
+  IconChess,
   IconId,
   IconWorldWww,
 } from "@tabler/icons-react";
@@ -29,24 +37,59 @@ export const socials: SocialLink[] = [
     accentColor: "green",
   },
   {
-    platform: "Tabler Demo",
-    username: "tabler-example.vercel.app",
-    url: "https://tabler-example.vercel.app",
-    icon: IconWorldWww,
-    accentColor: "azure",
+    platform: "Email",
+    username: "bourdeaux.adrien@gmail.com",
+    url: "mailto:bourdeaux.adrien@gmail.com",
+    icon: IconBrandGmail,
+    accentColor: "red"
   },
   {
-    platform: "SubnauticaNitrox",
-    username: "Contributor org",
-    url: "https://github.com/SubnauticaNitrox",
-    icon: IconBrandGithub,
-    accentColor: "cyan",
+    platform: "Discord",
+    username: "ohmvir",
+    url: "https://discord.com/users/695056854488973364",
+    icon: IconBrandDiscord,
+    accentColor: "purple"
   },
   {
-    platform: "PylonMC",
-    username: "Contributor org",
-    url: "https://github.com/pylonmc",
-    icon: IconBrandGithub,
-    accentColor: "purple",
+    platform: "Linkedin",
+    username: "",
+    url: "https://www.linkedin.com/in/adrien-bourdeaux-429427312/",
+    icon: IconBrandLinkedin,
+    accentColor: "blue"
   },
+  {
+    platform: "Twitch",
+    username: "ohmvir",
+    url: "https://www.twitch.tv/ohmvir",
+    icon: IconBrandTwitch,
+    accentColor: "purple"
+  },
+  {
+    platform: "Steam",
+    username: "OhmVIR",
+    url: "https://steamcommunity.com/id/OhmVIR/",
+    icon: IconBrandSteam,
+    accentColor: "blue"
+  },
+  {
+    platform: "Xbox",
+    username: "OhmVIR2427",
+    url: "https://www.xbox.com/en-CA/play/user/OhmVIR2427",
+    icon: IconBrandXbox,
+    accentColor: "green"
+  },
+  {
+    platform: "DockerHub",
+    username: "ohmivr",
+    url: "https://hub.docker.com/repositories/ohmivr",
+    icon: IconBrandDocker,
+    accentColor: "blue"
+  },
+  {
+    platform: "Chess.com",
+    username: "adrienbourdeaux",
+    url: "https://www.chess.com/member/adrienbourdeaux",
+    icon: IconChess,
+    accentColor: "green"
+  }
 ];
