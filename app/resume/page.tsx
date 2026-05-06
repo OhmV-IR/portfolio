@@ -1,6 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import ResumeViewer from "@/components/ResumeViewer";
-import { resume } from "@/lib/portfolio-data";
+import { resume } from "@/lib/data/resume";
 
 export default function ResumePage() {
   return (

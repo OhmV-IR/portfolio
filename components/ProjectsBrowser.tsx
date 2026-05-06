@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { IconFilter, IconX } from "@tabler/icons-react";
 import ProjectCard from "@/components/ProjectCard";
-import type { Project } from "@/lib/portfolio-data";
+import type { Project } from "@/lib/Project";
 
 interface ProjectsBrowserProps {
   projects: Project[];

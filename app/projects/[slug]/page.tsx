@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IconBrandGithub, IconExternalLink } from "@tabler/icons-react";
 import PageHeader from "@/components/PageHeader";
-import { getProjectBySlug, getProjectDisplayTags, projects } from "@/lib/portfolio-data";
+import { getProjectBySlug, getProjectDisplayTags, projects } from "@/lib/data/projects";
 
 interface ProjectDetailPageProps {
   params: Promise<{ slug: string }>;

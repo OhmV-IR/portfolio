@@ -4,7 +4,8 @@ import LanguagePanel from "@/components/LanguagePanel";
 import ProjectCard from "@/components/ProjectCard";
 import SkillBadge from "@/components/SkillBadge";
 import { getGitHubLanguageStats } from "@/lib/github-languages";
-import { getFeaturedProjects, skills } from "@/lib/portfolio-data";
+import { getFeaturedProjects } from "@/lib/data/projects";
+import { skills } from "@/lib/data/skills";
 
 export default async function Home() {
   const featuredProjects = getFeaturedProjects();

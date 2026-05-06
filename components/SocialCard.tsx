@@ -1,4 +1,4 @@
-import type { SocialLink } from "@/lib/portfolio-data";
+import type { SocialLink } from "@/lib/SocialLink";
 
 interface SocialCardProps {
   social: SocialLink;

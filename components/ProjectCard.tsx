@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { IconArrowRight } from "@tabler/icons-react";
-import { getProjectDisplayTags, type Project } from "@/lib/portfolio-data";
+import { getProjectDisplayTags } from "@/lib/data/projects";
+import type { Project } from "@/lib/Project";
 
 interface ProjectCardProps {
   project: Project;

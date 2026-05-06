@@ -1,4 +1,4 @@
-import type { Skill } from "@/lib/portfolio-data";
+import type { Skill } from "@/lib/Skill";
 
 interface SkillBadgeProps {
   skill: Skill;

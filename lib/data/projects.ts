@@ -1,44 +1,4 @@
-import type { ComponentType } from "react";
-import {
-  IconBrandGithub,
-  IconBrandYoutube,
-  IconId,
-  IconWorldWww,
-} from "@tabler/icons-react";
-
-export type TablerIcon = ComponentType<{
-  size?: number | string;
-  stroke?: number;
-  className?: string;
-}>;
-
-export interface Project {
-  slug: string;
-  title: string;
-  summary: string;
-  description: string;
-  tags: string[];
-  skillTags: string[];
-  status: "Active" | "Prototype" | "Maintained" | "Archived";
-  featured: boolean;
-  repoUrl?: string;
-  liveUrl?: string;
-}
-
-export interface Skill {
-  name: string;
-  category: string;
-  level?: number;
-  emphasis?: boolean;
-}
-
-export interface SocialLink {
-  platform: string;
-  username: string;
-  url: string;
-  icon: TablerIcon;
-  accentColor: string;
-}
+import type { Project } from "../Project";
 
 export const projects: Project[] = [
   {
@@ -153,68 +113,6 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/OhmV-IR/ti84-tictactoe",
   },
 ];
-
-export const skills: Skill[] = [
-  { name: "C++ / CMake", category: "Embedded and Performant", level: 88, emphasis: true },
-  { name: "Kotlin / JVM", category: "Backend & Tooling", level: 82, emphasis: true },
-  { name: "JavaScript / TypeScript", category: "Web & Automation", level: 84, emphasis: true },
-  { name: "Docker / Jenkins", category: "CI/CD", level: 78 },
-  { name: "Python Algorithms", category: "Graphics & Scripting", level: 76 },
-  { name: "Open Source Collaboration", category: "Engineering Practice", level: 86, emphasis: true },
-  { name: "Tabler UI Implementation", category: "Frontend", level: 80 },
-  { name: "C# / Unity Modding", category: "Game Engineering", level: 90, emphasis: true },
-];
-
-export const socials: SocialLink[] = [
-  {
-    platform: "GitHub",
-    username: "OhmV-IR",
-    url: "https://github.com/OhmV-IR",
-    icon: IconBrandGithub,
-    accentColor: "dark",
-  },
-  {
-    platform: "YouTube",
-    username: "@OhmVIR",
-    url: "https://www.youtube.com/@OhmVIR",
-    icon: IconBrandYoutube,
-    accentColor: "red",
-  },
-  {
-    platform: "ORCID",
-    username: "0009-0004-2370-4155",
-    url: "https://orcid.org/0009-0004-2370-4155",
-    icon: IconId,
-    accentColor: "green",
-  },
-  {
-    platform: "Tabler Demo",
-    username: "tabler-example.vercel.app",
-    url: "https://tabler-example.vercel.app",
-    icon: IconWorldWww,
-    accentColor: "azure",
-  },
-  {
-    platform: "SubnauticaNitrox",
-    username: "Contributor org",
-    url: "https://github.com/SubnauticaNitrox",
-    icon: IconBrandGithub,
-    accentColor: "cyan",
-  },
-  {
-    platform: "PylonMC",
-    username: "Contributor org",
-    url: "https://github.com/pylonmc",
-    icon: IconBrandGithub,
-    accentColor: "purple",
-  },
-];
-
-export const resume = {
-  title: "Resume / CV",
-  filePath: "/resume.pdf",
-  downloadName: "resume.pdf",
-};
 
 export function getFeaturedProjects() {
   return projects.filter((project) => project.featured).slice(0, 3);

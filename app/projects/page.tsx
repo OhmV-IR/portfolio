@@ -1,6 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import ProjectsBrowser from "@/components/ProjectsBrowser";
-import { getProjectSkillTags, projects } from "@/lib/portfolio-data";
+import { getProjectSkillTags, projects } from "@/lib/data/projects";
 
 export default function ProjectsPage() {
   return (

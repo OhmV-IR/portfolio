@@ -1,6 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import SocialCard from "@/components/SocialCard";
-import { socials } from "@/lib/portfolio-data";
+import { socials } from "@/lib/data/socials";
 
 export default function SocialsPage() {
   return (
