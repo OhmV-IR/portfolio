@@ -25,14 +25,14 @@ export default async function Home() {
               <div className="d-flex flex-wrap gap-2">
                 <Link href="/projects" className="btn btn-primary btn-lg">
                   View Projects
-                  <IconArrowRight size={18} stroke={1.75} />
+                  <IconArrowRight size={24} stroke={1.75} />
                 </Link>
                 <Link href="/socials" className="btn btn-outline-primary btn-lg">
-                  <IconShare2 size={18} stroke={1.75} />
+                  <IconShare2 size={24} stroke={1.75} />
                   Socials
                 </Link>
                 <Link href="/resume" className="btn btn-outline-secondary btn-lg">
-                  <IconFileCv size={18} stroke={1.75} />
+                  <IconFileCv size={24} stroke={1.75} />
                   Resume
                 </Link>
               </div>
