@@ -6,8 +6,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
-  title: "Adrien Bourdeaux | Portfolio",
-  description: "Projects, open-source contributions, skills, socials, and resume for Adrien Bourdeaux.",
+  title: "OhmV-IR | Portfolio",
+  description: "Projects, open-source contributions, skills, socials, and resume for OhmV-IR.",
 };
 
 export default function RootLayout({
