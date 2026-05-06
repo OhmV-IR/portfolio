@@ -22,7 +22,7 @@ export default function SiteNavbar() {
     <header className="navbar navbar-expand-md navbar-light bg-white border-bottom">
       <div className="container-xl">
         <Link href="/" className="navbar-brand fw-bold">
-          <Image width={window.innerHeight * 0.04} height={window.innerHeight * 0.04} src="/avatar.png" alt={""}></Image>
+          <Image width={window.innerHeight * 0.04} height={window.innerHeight * 0.04} src="/avatar.png" alt={"My profile picture"}></Image>
           Ohm's Portfolio
         </Link>
         <button
