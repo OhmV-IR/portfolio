@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconBriefcase, IconFileCv, IconHome, IconListCheck, IconMenu2, IconShare2 } from "@tabler/icons-react";
+import Image from "next/image";
 
 const navItems = [
   { href: "/", label: "Home", icon: IconHome },
@@ -21,6 +22,7 @@ export default function SiteNavbar() {
     <header className="navbar navbar-expand-md navbar-light bg-white border-bottom">
       <div className="container-xl">
         <Link href="/" className="navbar-brand fw-bold">
+          <Image width={window.innerHeight * 0.04} height={window.innerHeight * 0.04} src="/avatar.png" alt={""}></Image>
           Ohm's Portfolio
         </Link>
         <button
