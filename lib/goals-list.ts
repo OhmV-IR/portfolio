@@ -26,6 +26,7 @@ export const impossibleList: ImpossibleGoalSection[] = [
     goals: [
       {
         title: "Make a meaningful contribution to a major open-source project",
+        evidenceUrl: "https://github.com/SubnauticaNitrox/Nitrox/graphs/contributors",
         note: "The idea is to learn how to work with a team and the general architecture of open-source software development",
         completed: true,
         subtasks: [
@@ -36,11 +37,12 @@ export const impossibleList: ImpossibleGoalSection[] = [
       },
       {
         title: "Maintain a public developer tool that other people can use",
+        evidenceUrl: "https://2702rebels.com/robots/",
         completed: false,
         subtasks: [
           { title: "Ship a first usable release", completed: true },
-          { title: "Write setup documentation", completed: false },
-          { title: "Get feedback from another developer", completed: false },
+          { title: "Write setup documentation", completed: true },
+          { title: "Have other developers adopt it", completed: false },
         ],
       },
       {
@@ -60,6 +62,7 @@ export const impossibleList: ImpossibleGoalSection[] = [
     goals: [
       {
         title: "Build a CI/CD infrastructure project",
+        evidenceUrl: "https://jenkins.bgfamily.ca",
         completed: true,
         note: "Creating a Jenkins controller/agent CI/CD infrastructure and using it for my projects.",
         subtasks: [
@@ -73,6 +76,7 @@ export const impossibleList: ImpossibleGoalSection[] = [
         title: "Write an actual CI/CD pipeline",
         completed: true,
         note: "These pipelines are often used in industry to automate testing and deployment at scale, so learning them is important to me",
+        evidenceUrl: "https://github.com/SpectreRevival/pragmabackend/blob/master/Jenkinsfile",
         subtasks: [
           { title: "Get a project that is in need of CI", completed: true},
           { title: "Create an action to build on PR receive or push", completed: true },
