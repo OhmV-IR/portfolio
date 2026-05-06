@@ -1,44 +1,50 @@
 pipeline {
     agent none
+    
     tools {
         nodejs 'node24'
     }
-    stages{
-        stage("Build tasks"){
-        parallel {
-            stages {
-            stage("Build"){
-                agent { label "windows || linux"}
-                steps {
-                    checkout scm
-                    script {
-                        if(isUnix()){
-                            sh "npm i"
-                            sh "npm run build"
-                        } else {
-                            bat "npm i"
-                            bat "npm run build"
+
+    stages {
+        stage("Quality and Build") {
+            parallel {
+                stage("Build") {
+                    agent { label "windows || linux" }
+                    steps {
+                        checkout scm
+                        // "ENV_FILE" is the ID of the secret file in Jenkins Credentials
+                        withCredentials([file(credentialsId: 'ENV_FILE', variable: 'SECRET_FILE')]) {
+                            script {
+                                if (isUnix()) {
+                                    sh "cp ${SECRET_FILE} .env"
+                                    sh "npm i && npm run build"
+                                } else {
+                                    bat "copy ${SECRET_FILE} .env"
+                                    bat "npm i && npm run build"
+                                }
+                            }
+                        }
+                    }
+                }
+
+                stage("Lint") {
+                    agent { label "windows || linux" }
+                    steps {
+                        checkout scm
+                        withCredentials([file(credentialsId: 'ENV_FILE', variable: 'SECRET_FILE')]) {
+                            script {
+                                if (isUnix()) {
+                                    sh "cp ${SECRET_FILE} .env"
+                                    sh "npm i && npx eslint ."
+                                } else {
+                                    bat "copy ${SECRET_FILE} .env"
+                                    bat "npm i && npx eslint ."
+                                }
+                            }
                         }
                     }
                 }
             }
-            stage("Lint"){
-                agent { label "windows || linux"}
-                steps {
-                    checkout scm
-                    script {
-                        if(isUnix()){
-                            sh "npm i"
-                            sh "npx eslint ."
-                        } else {
-                            bat "npm i"
-                            bat "npx eslint ."
-                        }
-                    }
-                }
-            }
-            }
-        }
         }
     }
 }
