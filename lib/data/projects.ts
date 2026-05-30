@@ -14,6 +14,17 @@ export const projects: Project[] = [
     liveUrl: "https://2702rebels.com/robots"
   },
   {
+    slug: "salvage",
+    title: "Salvage",
+    summary: "A indie game project to accomplish something big with little, currently unreleased.",
+    description: "I was given the opportunity to work with industry professionals on a new UE5 indie game to bolster my game development skills.",
+    tags: ["Closed-Source"],
+    skillTags: ["Unreal Engine 5", "C++ / CMake", "Systems Design"],
+    featured: false,
+    status: "Active",
+    liveUrl: "https://www.playsalvage.com/"
+  },
+  {
     slug: "subnautica-nitrox",
     title: "Subnautica Nitrox",
     summary: "Open-source multiplayer mod for Subnautica, developed with the SubnauticaNitrox organization.",
