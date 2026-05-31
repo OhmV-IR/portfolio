@@ -10,7 +10,6 @@ import {
   IconBrandYoutube,
   IconChess,
   IconId,
-  IconWorldWww,
 } from "@tabler/icons-react";
 import type { SocialLink } from "../SocialLink";
 

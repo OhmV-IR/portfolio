@@ -65,7 +65,7 @@ export default async function Home() {
           <div className="d-flex align-items-center justify-content-between mb-3">
             <div>
               <h2 className="mb-1">Featured Projects</h2>
-              <div className="text-secondary">The projects I'm currently working on or the projects I liked the most.</div>
+              <div className="text-secondary">The projects I&apos;m currently working on or the projects I liked the most.</div>
             </div>
             <Link href="/projects" className="btn btn-outline-primary">
               All Projects

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconBriefcase, IconFileCv, IconHome, IconListCheck, IconMenu2, IconShare2 } from "@tabler/icons-react";
@@ -17,13 +17,23 @@ const navItems = [
 export default function SiteNavbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [avatarSize, setAvatarSize] = useState(0);
+
+  useEffect(() => {
+    const updateSize = () => {
+      setAvatarSize(window.innerHeight * 0.04);
+    };
+
+    updateSize();
+    window.addEventListener("resize", updateSize);
+  }, []);
 
   return (
     <header className="navbar navbar-expand-md navbar-light bg-white border-bottom">
       <div className="container-xl">
         <Link href="/" className="navbar-brand fw-bold">
-          <Image width={window.innerHeight * 0.04} height={window.innerHeight * 0.04} src="/avatar.png" alt={"My profile picture"}></Image>
-          Ohm's Portfolio
+          <Image width={avatarSize} height={avatarSize} src="/avatar.png" alt={"My profile picture"}></Image>
+          Ohm&apos;s Portfolio
         </Link>
         <button
           className="navbar-toggler"
