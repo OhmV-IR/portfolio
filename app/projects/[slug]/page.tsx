@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { IconBrandGithub, IconExternalLink } from "@tabler/icons-react";
 import PageHeader from "@/components/PageHeader";
 import { getProjectBySlug, getProjectDisplayTags, projects } from "@/lib/data/projects";
+import { ImageCarousel } from "@/components/ImageCarousel";
 
 interface ProjectDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -44,7 +45,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
       <PageHeader eyebrow={project.status} title={project.title} description={project.summary} />
       <div className="page-body">
         <div className="container-xl">
-          <div className="row g-4">
+          <div className="row g-4 mb-3">
             <div className="col-lg-8">
               <div className="card">
                 <div className="card-body">
@@ -87,6 +88,9 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 </div>
               </div>
             </div>
+          </div>
+          <div className="row g-4">
+             { project.carouselImages ? <ImageCarousel images={project.carouselImages}></ImageCarousel> : null }
           </div>
         </div>
       </div>

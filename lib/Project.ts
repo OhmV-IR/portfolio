@@ -9,4 +9,5 @@ export interface Project {
   featured: boolean;
   repoUrl?: string;
   liveUrl?: string;
+  carouselImages?: string[];
 }

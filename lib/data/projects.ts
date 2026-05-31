@@ -22,7 +22,8 @@ export const projects: Project[] = [
     skillTags: ["Unreal Engine 5", "C++ / CMake", "Systems Design"],
     featured: false,
     status: "Active",
-    liveUrl: "https://www.playsalvage.com/"
+    liveUrl: "https://www.playsalvage.com/",
+    carouselImages: ["/SLVG_Splash_Ultrawide.png", "/SLVG_WallP_RustedGiants.png"]
   },
   {
     slug: "subnautica-nitrox",
