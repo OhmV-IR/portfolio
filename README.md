@@ -1,6 +1,6 @@
 # Portfolio
 
-A Next.js and Tabler CSS portfolio for Adrien Bourdeaux.
+A Next.js and Tabler CSS portfolio.
 
 ## Getting Started
 
