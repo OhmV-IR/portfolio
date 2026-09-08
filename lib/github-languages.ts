@@ -4,241 +4,159 @@ export interface GitHubLanguageStat {
   percentage: number;
 }
 
-interface GitHubRepo {
-  name: string;
-  full_name: string;
-  languages_url: string;
-  archived: boolean;
-  fork: boolean;
-}
-
-interface GitHubCommitSearchResponse {
-  items: Array<{
-    repository?: GitHubRepo;
-  }>;
-}
-
 const GITHUB_USER = "OhmV-IR";
 const REVALIDATE_SECONDS = 60 * 60 * 24;
-const INCLUDE_FORKS = process.env.GITHUB_LANGUAGE_INCLUDE_FORKS === "true";
-const AUTO_DISCOVER = process.env.GITHUB_LANGUAGE_AUTO_DISCOVER !== "false";
 
-// Add stable exclusions here using either "owner/repo" or just "repo".
-const BLACKLISTED_LANGUAGE_REPOS = new Set<string>([
-  // "OhmV-IR/example-repo",
-]);
+interface GraphQLResponse {
+  data?: {
+    user?: {
+      repositories: {
+        nodes: Array<{
+          name: string;
+          nameWithOwner: string;
+          isArchived: boolean;
+          isFork: boolean;
+          languages: {
+            edges: Array<{
+              size: number;
+              node: { name: string };
+            }>;
+          };
+        }>;
+      };
+    };
+  };
+  errors?: Array<{ message: string }>;
+}
 
 export async function getGitHubLanguageStats(): Promise<GitHubLanguageStat[]> {
-  try {
-    const repos = await getGitHubRepos();
-    const blacklist = getRepoBlacklist();
-    const includedRepos = repos.filter((repo) => {
-      const fullName = repo.full_name.toLowerCase();
-      const shortName = repo.name.toLowerCase();
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) {
+    console.warn("GITHUB_TOKEN missing. Returning empty language stats.");
+    return [];
+  }
 
-      return (
-        !repo.archived &&
-        (INCLUDE_FORKS || !repo.fork) &&
-        !blacklist.has(fullName) &&
-        !blacklist.has(shortName)
-      );
-    });
-
-    const repoLanguagePercentages = await Promise.all(
-      includedRepos.map(async (repo) => {
-        try {
-          const languages = await fetchGitHub<Record<string, number>>(repo.languages_url);
-          const totalBytes = Object.values(languages).reduce((sum, bytes) => sum + bytes, 0);
-
-          if (totalBytes === 0) {
-            return null;
+  const query = `
+    query getLanguages($login: String!) {
+      user(login: $login) {
+        repositories(
+          first: 100
+          ownerAffiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER]
+          orderBy: { field: UPDATED_AT, direction: DESC }
+        ) {
+          nodes {
+            name
+            nameWithOwner
+            isArchived
+            isFork
+            languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+              edges {
+                size
+                node {
+                  name
+                }
+              }
+            }
           }
-
-          return Object.entries(languages).map(([name, bytes]) => ({
-            name,
-            percentage: (bytes / totalBytes) * 100,
-          }));
-        } catch {
-          return null;
         }
-      }),
-    );
-
-    const languageTotals = new Map<string, { percentageTotal: number; repoCount: number }>();
-    let reposWithLanguageData = 0;
-
-    for (const repoLanguages of repoLanguagePercentages) {
-      if (!repoLanguages) {
-        continue;
-      }
-
-      reposWithLanguageData += 1;
-
-      for (const language of repoLanguages) {
-        const languageName = getLanguageGroup(language.name);
-        const current = languageTotals.get(languageName) ?? { percentageTotal: 0, repoCount: 0 };
-        current.percentageTotal += language.percentage;
-        current.repoCount += 1;
-        languageTotals.set(languageName, current);
       }
     }
+  `;
 
-    if (languageTotals.size === 0 || reposWithLanguageData === 0) {
+  try {
+    const response = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query, variables: { login: GITHUB_USER } }),
+      next: {
+        revalidate: REVALIDATE_SECONDS,
+        tags: ["github-languages"],
+      },
+    });
+
+    if (!response.ok) {
+      console.error(`GitHub GraphQL API Error: ${response.statusText}`);
       return [];
     }
 
+    const json: GraphQLResponse = await response.json();
+    if (json.errors) {
+      console.error("GitHub GraphQL Errors:", json.errors);
+      return [];
+    }
+
+    const repos = json.data?.user?.repositories.nodes ?? [];
+    const blacklist = getRepoBlacklist();
+    const includeForks = process.env.GITHUB_LANGUAGE_INCLUDE_FORKS === "true";
+
+    const languageTotals = new Map<string, { bytes: number; repoSet: Set<string> }>();
+    let grandTotalBytes = 0;
+
+    for (const repo of repos) {
+      const fullName = repo.nameWithOwner.toLowerCase();
+      const shortName = repo.name.toLowerCase();
+
+      if (
+        repo.isArchived ||
+        (!includeForks && repo.isFork) ||
+        blacklist.has(fullName) ||
+        blacklist.has(shortName)
+      ) {
+        continue;
+      }
+
+      for (const edge of repo.languages.edges) {
+        const langName = getLanguageGroup(edge.node.name);
+        const bytes = edge.size;
+
+        grandTotalBytes += bytes;
+
+        const current = languageTotals.get(langName) ?? { bytes: 0, repoSet: new Set() };
+        current.bytes += bytes;
+        current.repoSet.add(fullName);
+        languageTotals.set(langName, current);
+      }
+    }
+
+    if (grandTotalBytes === 0) return [];
+
     return Array.from(languageTotals.entries())
-      .map(([name, stats]) => ({
+      .map(([name, data]) => ({
         name,
-        repoCount: stats.repoCount,
-        percentage: Math.round(stats.percentageTotal / reposWithLanguageData),
+        repoCount: data.repoSet.size,
+        percentage: Math.round((data.bytes / grandTotalBytes) * 100),
       }))
-      .filter((language) => language.percentage > 0)
-      .sort((left, right) => right.percentage - left.percentage || left.name.localeCompare(right.name))
+      .filter((lang) => lang.percentage > 0)
+      .sort((a, b) => b.percentage - a.percentage || a.name.localeCompare(b.name))
       .slice(0, 6);
-  } catch {
+
+  } catch (error) {
+    console.error("Failed to fetch GitHub language stats:", error);
     return [];
   }
 }
 
-async function getGitHubRepos(): Promise<GitHubRepo[]> {
-  const repos = new Map<string, GitHubRepo>();
-  const organizations = getConfiguredOrganizations();
-
-  if (AUTO_DISCOVER || organizations.length > 0) {
-    const queries = AUTO_DISCOVER
-      ? ["author", "committer"].map((role) => `${role}:${GITHUB_USER}`)
-      : ["author", "committer"].flatMap((role) =>
-          organizations.map((organization) => `${role}:${GITHUB_USER} org:${organization}`),
-        );
-
-    for (const query of queries) {
-      let discoveredRepos: GitHubRepo[] = [];
-
-      try {
-        discoveredRepos = await searchGitHubRepos(query);
-      } catch {
-        continue;
-      }
-
-      for (const repo of discoveredRepos) {
-        repos.set(repo.full_name.toLowerCase(), repo);
-      }
-    }
-
-    return Array.from(repos.values());
-  }
-
-  const affiliatedRepos = await getAffiliatedGitHubRepos();
-
-  for (const repo of affiliatedRepos) {
-    repos.set(repo.full_name.toLowerCase(), repo);
-  }
-
-  return Array.from(repos.values());
-}
-
-async function searchGitHubRepos(query: string): Promise<GitHubRepo[]> {
-  const repos = new Map<string, GitHubRepo>();
-
-  // GitHub caps search results at 1,000 results, so ten pages is the useful maximum.
-  for (let page = 1; page <= 10; page += 1) {
-    const params = new URLSearchParams({ q: query, per_page: "100", page: String(page) });
-    const result = await fetchGitHub<GitHubCommitSearchResponse>(
-      `https://api.github.com/search/commits?${params.toString()}`,
-    );
-
-    for (const item of result.items) {
-      const repo = item.repository;
-
-      if (repo?.full_name && repo.languages_url) {
-        repos.set(repo.full_name.toLowerCase(), repo);
-      }
-    }
-
-    if (result.items.length < 100) {
-      break;
-    }
-  }
-
-  return Array.from(repos.values());
-}
-
-async function getAffiliatedGitHubRepos(): Promise<GitHubRepo[]> {
-  const token = process.env.GITHUB_TOKEN;
-  const baseUrl = token
-    ? "https://api.github.com/user/repos?visibility=all&affiliation=owner,collaborator,organization_member&per_page=100&sort=updated"
-    : `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`;
-
-  const repos: GitHubRepo[] = [];
-
-  for (let page = 1; page <= 10; page += 1) {
-    const separator = baseUrl.includes("?") ? "&" : "?";
-    const pageRepos = await fetchGitHub<GitHubRepo[]>(`${baseUrl}${separator}page=${page}`);
-    repos.push(...pageRepos);
-
-    if (pageRepos.length < 100) {
-      break;
-    }
-  }
-
-  return repos;
-}
-
-function getConfiguredOrganizations() {
-  return (process.env.GITHUB_LANGUAGE_ORGS ?? "")
-    .split(",")
-    .map((organization) => organization.trim())
-    .filter(Boolean);
-}
-
-async function fetchGitHub<T>(url: string): Promise<T> {
-  const token = process.env.GITHUB_TOKEN;
-  const response = await fetch(url, {
-    headers: {
-      Accept: "application/vnd.github+json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    next: {
-      revalidate: REVALIDATE_SECONDS,
-      tags: ["github-languages"],
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`GitHub request failed: ${response.status}`);
-  }
-
-  return response.json() as Promise<T>;
-}
-
-function getRepoBlacklist() {
+function getRepoBlacklist(): Set<string> {
   const envBlacklist = process.env.GITHUB_LANGUAGE_REPO_BLACKLIST ?? "";
   const blacklist = new Set<string>();
 
-  for (const repo of BLACKLISTED_LANGUAGE_REPOS) {
-    blacklist.add(repo.toLowerCase());
-  }
-
   for (const repo of envBlacklist.split(",")) {
-    const normalizedRepo = repo.trim().toLowerCase();
-
-    if (normalizedRepo) {
-      blacklist.add(normalizedRepo);
-    }
+    const normalized = repo.trim().toLowerCase();
+    if (normalized) blacklist.add(normalized);
   }
 
   return blacklist;
 }
 
-function getLanguageGroup(language: string) {
+function getLanguageGroup(language: string): string {
   if (language === "JavaScript" || language === "TypeScript") {
     return "JavaScript/TypeScript";
   }
-
   if (language === "C" || language === "C++") {
     return "C/C++";
   }
-
   return language;
 }
