@@ -17,13 +17,23 @@ export const projects: Project[] = [
     slug: "salvage",
     title: "Salvage",
     summary: "A indie game project to accomplish something big with little, currently unreleased.",
-    description: "I was given the opportunity to work with industry professionals on a new UE5 indie game to bolster my game development skills.",
+    description: "I was given the opportunity to work with industry professionals on a new UE5 indie game to bolster my game development skills by working on an Unreal Engine 5 game that would allow me to learn the engine and improve my game development knowledge and skills.",
     tags: ["Closed-Source"],
     skillTags: ["Unreal Engine 5", "C++ / CMake", "Systems Design"],
     featured: false,
     status: "Active",
     liveUrl: "https://www.playsalvage.com/",
     carouselImages: ["/SLVG_Splash_Ultrawide.png", "/SLVG_WallP_RustedGiants.png"]
+  },
+  {
+    slug: "jenkins-ai-synapse",
+    title: "Jenkins AI Synapse",
+    summary: "A plugin powering agentic automation workflows in Jenkins",
+    description: "I want this project to be highly modular and extensible so people can use this to build whatever they want. Currently the most powerful tools in AI are those that can provide specialized data and inputs to AI models, typically via tools or skills and this framework allows for anyone to add their skills, custom tools and other AI infrastructure to the plugin to make it specialized to their use case. It also is designed to support a variety of clients and APIs while providing a solid API base for workflows to build on top of so workflow developers don't have to worry about what client is executing the request and clients don't have to worry about the overall workflow and vice versa. This project also includes CI/CD for publishing to maven, running unit tests and code style formatting.",
+    tags: ["Closed-Source"],
+    skillTags: ["API development", "Java", "Systems Design"],
+    featured: true,
+    status: "Active"
   },
   {
     slug: "subnautica-nitrox",
@@ -34,7 +44,7 @@ export const projects: Project[] = [
     tags: ["C#", "Unity", "Game Modding", "Open Source"],
     skillTags: ["C#", "Unity", "Open Source Collaboration"],
     status: "Past Contributor",
-    featured: true,
+    featured: false,
     repoUrl: "https://github.com/SubnauticaNitrox/Nitrox",
     liveUrl: "https://nitrox.rux.gg",
   },
@@ -44,7 +54,7 @@ export const projects: Project[] = [
     summary: "A recreation of Pragma's template backend for games used by Spectre Divide and many others.",
     description: "As game studios seek to move fast, purchasing an already made and bug-free established backend from a vendor can often be a good development choice that saves time and money compared to trying to develop an in-house solution. This has led many startups to use it, including Mountaintop Studios who made Spectre Divide. Unfortunately many of these games shut down, but with this software we will be able to emulate the pragma servers and bring these games one step closer to revival by reducing the amount of reverse engineering required to only what is needed to reverse engineer the game server.",
     tags: ["Open-Source", "Reverse Engineering"],
-    skillTags: ["CI/CD", "C++ / CMake", "Open Source Collaboration", "API development"],
+    skillTags: ["CI/CD", "C#", "ASP.NET", "Open Source Collaboration", "API development"],
     status: "Active",
     featured: true,
     repoUrl: "https://github.com/SpectreRevival/pragmabackend"
